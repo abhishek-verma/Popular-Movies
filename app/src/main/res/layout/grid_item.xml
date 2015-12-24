@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp">
+
+    <ImageView
+        android:id="@+id/movieThumbImgV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignBottom="@id/movieThumbImgV"
+        android:background="#99000000"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/movieNameTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/movieRatingTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/movieNameTxtV"
+            android:textColor="#B3ffffff"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

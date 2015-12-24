@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionOverflowButtonStyle">@style/OverflowMenuButton</item>
+    </style>
+
+    <style name="OverflowMenuButton" parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_sort</item>
+    </style>
+</resources>
