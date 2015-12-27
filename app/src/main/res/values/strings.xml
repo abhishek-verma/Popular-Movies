@@ -4,4 +4,10 @@
     <string name="action_sort_popular">Popular</string>
     <string name="action_sort_top_rated">Top Rated</string>
 
+    <string name="snackbar_download_failed_msg">Error loading movies.</string>
+    <string name="retry">RETRY</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="overview">Overview</string>
 </resources>

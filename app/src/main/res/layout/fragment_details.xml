@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".DetailsFragment"
+    tools:showIn="@layout/activity_details">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+        <!--Poster ImageView-->
+        <ImageView
+            android:id="@+id/movieThumbImgV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/thumb_img_height" />
+
+        <!--Rating TextView-->
+        <TextView
+            android:id="@+id/movieReleaseDateTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/movieThumbImgV"
+            android:layout_marginLeft="@dimen/movie_details_margin"
+            android:layout_marginStart="@dimen/movie_details_margin"
+            android:layout_toEndOf="@id/movieThumbImgV"
+            android:layout_toRightOf="@id/movieThumbImgV"
+            android:textColor="@color/txtColorSec"
+            android:textSize="@dimen/movie_rating_txt_size" />
+
+        <!--Rating TextView-->
+        <TextView
+            android:id="@+id/movieRatingTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/movieReleaseDateTxtV"
+            android:layout_marginLeft="@dimen/movie_details_margin"
+            android:layout_marginStart="@dimen/movie_details_margin"
+            android:layout_toEndOf="@id/movieThumbImgV"
+            android:layout_toRightOf="@id/movieThumbImgV"
+            android:textColor="@color/txtColorSec"
+            android:textSize="@dimen/movie_rating_txt_size" />
+
+        <!--Title TextView-->
+        <TextView
+            android:id="@+id/movieNameTxtV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/movieRatingTxtV"
+            android:layout_marginLeft="@dimen/movie_details_margin"
+            android:layout_marginStart="@dimen/movie_details_margin"
+            android:layout_toEndOf="@id/movieThumbImgV"
+            android:layout_toRightOf="@id/movieThumbImgV"
+            android:ellipsize="end"
+            android:fadingEdge="horizontal"
+            android:maxLines="2"
+            android:textColor="@color/txtColor"
+            android:textSize="@dimen/movie_title_txt_size" />
+    </RelativeLayout>
+
+
+    <View style="@style/hr" />
+
+    <!--TODO -->
+    <!--put inside a cardView-->
+    <!--set some top margin-->
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/overviewCrdV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/cardview_dark_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_dark_background"
+            android:orientation="vertical"
+            android:padding="@dimen/cardview_padding"
+            android:paddingTop="@dimen/cardview_padding_top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/overview"
+                android:textColor="@color/txtColor"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/movieOverviewTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cardview_padding"
+                android:textColor="@color/txtColorSec"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <!--overview TextView-->
+</LinearLayout>

@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="#111"
+        android:drawSelectorOnTop="true"
         android:numColumns="2" />
 
 </FrameLayout>

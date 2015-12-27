@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@id/movieThumbImgV"
         android:background="#99000000"
         android:padding="16dp">
@@ -35,6 +35,7 @@
             android:layout_below="@id/movieNameTxtV"
             android:textColor="#B3ffffff"
             android:textSize="12sp" />
+
 
     </RelativeLayout>
 

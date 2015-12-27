@@ -13,18 +13,29 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
+ * Adapter attached to gridView in discover movies fragment
+ * Contains views from data items of type movieData
  * Created by Abhishek on 17-12-2015.
  */
 public class MovieAdapter extends ArrayAdapter<MovieData> {
-    Context context;
-    ArrayList<MovieData> moviesData;
+    ///////////////////////////////////////////////////////////////////////////
+    // Fields
+    ///////////////////////////////////////////////////////////////////////////
+    private final Context context;
+    private final ArrayList<MovieData> moviesData;
 
-    public MovieAdapter(Context context, int resource, ArrayList<MovieData> data) {
-        super(context, resource, data);
+    ///////////////////////////////////////////////////////////////////////////
+    // Constructor(s)
+    ///////////////////////////////////////////////////////////////////////////
+    public MovieAdapter(Context context,  ArrayList<MovieData> data) {
+        super(context,  R.layout.grid_item, data);
         this.context = context;
         moviesData = data;
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Overridden Methods
+    ///////////////////////////////////////////////////////////////////////////
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -47,17 +58,20 @@ public class MovieAdapter extends ArrayAdapter<MovieData> {
         MovieData movieData = moviesData.get(position);
         Picasso.with(context).load(movieData.getThumbImgPath()).into(movieItemHolder.movieThumbImgV);
         movieItemHolder.movieNameTxtV.setText(movieData.getMovieName());
-        movieItemHolder.movieRatingTxtV.setText(String.valueOf(movieData.getRating()) + " \u2605");
+        movieItemHolder.movieRatingTxtV.setText(String.format("%s \u2605", movieData.getRating()));
 
 
         return movieItemView;
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Custom Methods
+    ///////////////////////////////////////////////////////////////////////////
     /**
      * An holder is used,
      * coz if not used, the findViewById method will be called every time a new item is shown in the grid view,
      * and that's just frustrating, even for a machine,
-     * and which ofcourse also takes a lot of extra time,
+     * and which of course also takes a lot of extra time,
      * while the holder sort of saves the location of the views inside the parent view
      * which save the system from searching for a view again and again.
      */
