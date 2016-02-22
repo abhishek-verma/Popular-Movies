@@ -5,82 +5,84 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".DetailsFragment"
+    tools:context=".details.DetailsFragment"
     tools:showIn="@layout/activity_details">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
-        <!--Poster ImageView-->
-        <ImageView
-            android:id="@+id/movieThumbImgV"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/thumb_img_height" />
+        android:layout_margin="@dimen/activity_horizontal_margin">
 
-        <!--Rating TextView-->
-        <TextView
-            android:id="@+id/movieReleaseDateTxtV"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/movieThumbImgV"
-            android:layout_marginLeft="@dimen/movie_details_margin"
-            android:layout_marginStart="@dimen/movie_details_margin"
-            android:layout_toEndOf="@id/movieThumbImgV"
-            android:layout_toRightOf="@id/movieThumbImgV"
-            android:textColor="@color/txtColorSec"
-            android:textSize="@dimen/movie_rating_txt_size" />
-
-        <!--Rating TextView-->
-        <TextView
-            android:id="@+id/movieRatingTxtV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/movieReleaseDateTxtV"
-            android:layout_marginLeft="@dimen/movie_details_margin"
-            android:layout_marginStart="@dimen/movie_details_margin"
-            android:layout_toEndOf="@id/movieThumbImgV"
-            android:layout_toRightOf="@id/movieThumbImgV"
-            android:textColor="@color/txtColorSec"
-            android:textSize="@dimen/movie_rating_txt_size" />
-
-        <!--Title TextView-->
-        <TextView
-            android:id="@+id/movieNameTxtV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/movieRatingTxtV"
-            android:layout_marginLeft="@dimen/movie_details_margin"
-            android:layout_marginStart="@dimen/movie_details_margin"
-            android:layout_toEndOf="@id/movieThumbImgV"
-            android:layout_toRightOf="@id/movieThumbImgV"
-            android:ellipsize="end"
-            android:fadingEdge="horizontal"
-            android:maxLines="2"
-            android:textColor="@color/txtColor"
-            android:textSize="@dimen/movie_title_txt_size" />
-    </RelativeLayout>
+            android:background="@color/card_bg">
+            <!--Poster ImageView-->
+            <ImageView
+                android:id="@+id/movieThumbImgV"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/thumb_img_height"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:adjustViewBounds="true" />
 
 
-    <View style="@style/hr" />
+            <!--ReleaseDate TextView-->
+            <TextView
+                android:id="@+id/movieReleaseDateTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/movieThumbImgV"
+                android:layout_marginLeft="@dimen/movie_details_margin"
+                android:layout_marginStart="@dimen/movie_details_margin"
+                android:layout_toEndOf="@id/movieThumbImgV"
+                android:layout_toRightOf="@id/movieThumbImgV"
+                android:paddingBottom="@dimen/cardview_padding"
+                android:textColor="@color/txtColorSec"
+                android:textSize="@dimen/movie_rating_txt_size" />
 
-    <!--TODO -->
-    <!--put inside a cardView-->
-    <!--set some top margin-->
+            <!--Title TextView-->
+            <TextView
+                android:id="@+id/movieNameTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/movieReleaseDateTxtV"
+                android:layout_alignParentTop="true"
+                android:ellipsize="end"
+                android:fadingEdge="horizontal"
+                android:maxLines="2"
+                android:paddingTop="@dimen/cardview_padding"
+                android:textColor="@color/txtColor"
+                android:textSize="@dimen/movie_title_txt_size" />
 
+            <!--Rating TextView-->
+            <TextView
+                android:id="@+id/movieRatingTxtV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/movieReleaseDateTxtV"
+                android:layout_below="@+id/movieNameTxtV"
+                android:textColor="@color/txtColorSec"
+                android:textSize="@dimen/movie_rating_txt_size" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--<View style="@style/hr" />-->
+
+
+    <!--overview TextView-->
     <android.support.v7.widget.CardView
         android:id="@+id/overviewCrdV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        android:background="@color/cardview_dark_background">
+        android:background="@color/card_bg">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cardview_dark_background"
+            android:background="@color/card_bg"
             android:orientation="vertical"
             android:padding="@dimen/cardview_padding"
             android:paddingTop="@dimen/cardview_padding_top">
@@ -101,5 +103,55 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-    <!--overview TextView-->
+
+    <!--<View style="@style/hr" />-->
+
+    <!--for debugging-->
+    <!--<TextView-->
+        <!--android:id="@+id/tmpTrTxtV"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Trailers"-->
+        <!--android:textColor="@color/txtColor" />-->
+
+
+    <!--Trailers, will be Visibility.GONE until anything to display-->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/card_bg">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trailerRecV"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/card_bg"
+            android:visibility="gone" />
+    </android.support.v7.widget.CardView>
+
+    <!--for debugging-->
+    <!--<TextView android:id="@+id/tmpRvTxtV"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@color/txtColor"-->
+    <!--android:text="Reviews"/>-->
+
+
+    <!--Reviews, will be Visibility.GONE until anything to display-->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/card_bg">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reviewRecV"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/card_bg"
+            android:padding="@dimen/cardview_padding"
+            android:paddingTop="@dimen/cardview_padding_top"
+            android:visibility="gone" />
+    </android.support.v7.widget.CardView>
 </LinearLayout>

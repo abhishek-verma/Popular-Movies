@@ -17,7 +17,6 @@ public class MovieData implements Parcelable{
     ///////////////////////////////////////////////////////////////////////////
     // Constants
     ///////////////////////////////////////////////////////////////////////////
-    public static final String EXTRA_MOVIE_DATA = "MovieData";
 
     ///////////////////////////////////////////////////////////////////////////
     // Fields
@@ -28,17 +27,21 @@ public class MovieData implements Parcelable{
     private final String overview;
     private final String backdropImgPath;
     private final String releaseDate;
+    private final long movieId;
+    private final double popularity;
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructors
     ///////////////////////////////////////////////////////////////////////////
-    public MovieData(String thumbImgPath, String movieName, Double rating, String overview, String backdropImgPath, String releaseDate) {
+    public MovieData(String thumbImgPath, String movieName, Double rating, String overview, String backdropImgPath, String releaseDate, long movieId, double popularity) {
         this.thumbImgPath = thumbImgPath;
         this.movieName = movieName;
         this.rating = rating;
         this.overview = overview;
         this.backdropImgPath = backdropImgPath;
         this.releaseDate = releaseDate;
+        this.movieId = movieId;
+        this.popularity = popularity;
     }
 
     private MovieData(Parcel in){
@@ -48,6 +51,8 @@ public class MovieData implements Parcelable{
         overview = in.readString();
         backdropImgPath = in.readString();
         releaseDate = in.readString();
+        movieId = in.readLong();
+        popularity = in.readDouble();
     }
 
 
@@ -76,6 +81,14 @@ public class MovieData implements Parcelable{
 
     public String getReleaseDate() {
         return releaseDate;
+    }
+
+    public long getMovieId(){
+        return movieId;
+    }
+
+    public double getPopularity(){
+        return popularity;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -116,6 +129,8 @@ public class MovieData implements Parcelable{
         dest.writeString(overview);
         dest.writeString(backdropImgPath);
         dest.writeString(releaseDate);
+        dest.writeLong(movieId);
+        dest.writeDouble(popularity);
     }
 
     /**

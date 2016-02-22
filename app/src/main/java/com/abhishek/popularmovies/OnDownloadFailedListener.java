@@ -9,6 +9,6 @@ package com.abhishek.popularmovies;
  *
  * Created by Abhishek on 25-12-2015.
  */
-interface OnDownloadFailedListener {
+public interface OnDownloadFailedListener {
     void onDownloadFailed();
 }
