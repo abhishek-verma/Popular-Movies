@@ -29,9 +29,8 @@ public class Util {
 
     /**
      * Gets movies data in JSON String
-     * parses the data to form a meaningful array of type MovieData
+     * parses the data and saves in DB
      * @param movieDataJSONStr the JSONData it receives
-     * @return Array of type MovieData containing meaningful movie data from to JSON provided
      * @throws JSONException
      */
     public static void getMoviesDataFromJSON(String movieDataJSONStr, Context context)
@@ -101,7 +100,7 @@ public class Util {
             inserted = context.getContentResolver().bulkInsert(MovieContract.MovieEntry.CONTENT_URI, cvArray);
         }
 
-        Log.d(LOG_TAG, "getMoviesDataFromJSON conplete, " + inserted + " inserted");
+        Log.d(LOG_TAG, "getMoviesDataFromJSON complete, " + inserted + " inserted");
     }
 
     public static String FetchDataFromUrl(URL url){

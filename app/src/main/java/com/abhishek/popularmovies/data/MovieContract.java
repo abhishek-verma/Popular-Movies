@@ -4,18 +4,14 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import com.abhishek.popularmovies.DiscoverMoviesFragment;
-
 /**
  * Created by Abhishek on 2/15/2016.
  */
 public class MovieContract {
     public static final String CONTENT_AUTHORITY = "com.abhishek.popularmovies";
-
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-
     public static final String PATH_MOVIE = "movie";
     public static final String PATH_FAV = "fav";
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final class MovieEntry implements BaseColumns {
 
@@ -43,8 +39,7 @@ public class MovieContract {
         }
 
         public static String getMovieIdFromUri(Uri uri){
-            String idStr = uri.getLastPathSegment();
-            return idStr;
+            return uri.getLastPathSegment();
         }
     }
 

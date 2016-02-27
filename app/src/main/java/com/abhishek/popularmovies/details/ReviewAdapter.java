@@ -1,6 +1,5 @@
 package com.abhishek.popularmovies.details;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +16,8 @@ import java.util.List;
  * Created by Abhishek on 2/21/2016.
  */
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewItemViewHolder> {
-    private List<DataObjects.ReviewData> reviewDatas;
-    Context mContext;
+    private final List<DataObjects.ReviewData> reviewDatas;
+    private final Context mContext;
 
     public ReviewAdapter(ArrayList<DataObjects.ReviewData> data, Context context){
         reviewDatas = data;
@@ -47,8 +46,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewItem
 
     public class ReviewItemViewHolder extends RecyclerView.ViewHolder {
 
-        TextView authorNameTxtV;
-        TextView contentTxtV;
+        final TextView authorNameTxtV;
+        final TextView contentTxtV;
 
         public ReviewItemViewHolder(View itemView) {
             super(itemView);

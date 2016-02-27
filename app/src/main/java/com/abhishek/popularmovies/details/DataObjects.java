@@ -6,9 +6,9 @@ package com.abhishek.popularmovies.details;
 public class DataObjects {
     public static class ReviewData{
         // Writer of the review
-        String author;
+        final String author;
         // String containing actual review
-        String content;
+        final String content;
 
         public ReviewData(String author, String content){
             this.author = author;
@@ -17,18 +17,18 @@ public class DataObjects {
     }
     public static class TrailerData{
         // Name of the trailer
-        String trailerName;
+        final String trailerName;
 
         // Source of the trailer
-        String sourceUrl;//Append into youtube watch link like : https://www.youtube.com/watch?v=<trailer_src>
+        final String sourceUrl;//Append into youtube watch link like : https://www.youtube.com/watch?v=<trailer_src>
 
         //Source for youtube thumbnail
-        String youtubeThumg;//http://img.youtube.com/vi/<trailer_src>/0.jpg
+        final String youtubeThumb;//http://img.youtube.com/vi/<trailer_src>/0.jpg
 
         public TrailerData(String name, String src){
             trailerName = name;
             sourceUrl = "https://www.youtube.com/watch?v=" + src;
-            youtubeThumg = "http://img.youtube.com/vi/" + src + "/0.jpg";
+            youtubeThumb = "http://img.youtube.com/vi/" + src + "/0.jpg";
         }
     }
 }

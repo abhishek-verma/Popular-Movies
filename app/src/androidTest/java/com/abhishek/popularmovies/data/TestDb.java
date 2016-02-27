@@ -15,7 +15,6 @@
  */
 package com.abhishek.popularmovies.data;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
@@ -27,7 +26,7 @@ public class TestDb extends AndroidTestCase {
     public static final String LOG_TAG = TestDb.class.getSimpleName();
 
     // Since we want each test to start with a clean slate
-    void deleteTheDatabase() {
+    private void deleteTheDatabase() {
         mContext.deleteDatabase(MovieDbHelper.DATABASE_NAME);
     }
 
@@ -52,7 +51,7 @@ public class TestDb extends AndroidTestCase {
         // build a HashSet of all of the table names we wish to look for
         // Note that there will be another table in the DB that stores the
         // Android metadata (db version information)
-        final HashSet<String> tableNameHashSet = new HashSet<String>();
+        final HashSet<String> tableNameHashSet = new HashSet<>();
         tableNameHashSet.add(MovieContract.MovieEntry.TABLE_NAME);
 
         mContext.deleteDatabase(MovieDbHelper.DATABASE_NAME);
@@ -84,7 +83,7 @@ public class TestDb extends AndroidTestCase {
                 c.moveToFirst());
 
         // Build a HashSet of all of the column names we want to look for
-        final HashSet<String> columnHashSet = new HashSet<String>();
+        final HashSet<String> columnHashSet = new HashSet<>();
         columnHashSet.add(MovieContract.MovieEntry._ID);
         columnHashSet.add(MovieContract.MovieEntry.COLUMN_BACKDROP_PATH);
         columnHashSet.add(MovieContract.MovieEntry.COLUMN_MOVIE_TITLE);

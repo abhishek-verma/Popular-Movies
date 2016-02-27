@@ -2,6 +2,7 @@ package com.abhishek.popularmovies;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +18,17 @@ import com.squareup.picasso.Picasso;
  * Created by Abhishek on 17-12-2015.
  */
 public class MovieAdapter extends CursorAdapter {
+    private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
     ///////////////////////////////////////////////////////////////////////////
     // Fields
     ///////////////////////////////////////////////////////////////////////////
-    private final Context context;
+//    private final Context context;
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor(s)
     ///////////////////////////////////////////////////////////////////////////
     public MovieAdapter(Context context,  Cursor c, int flags) {
         super(context, c, flags);
-        this.context = context;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -54,11 +55,13 @@ public class MovieAdapter extends CursorAdapter {
         String posterPath = cursor.getString(DiscoverMoviesFragment.COL_INDEX_POSTER_PATH);
         String rating = context.getString(R.string.format_rating, cursor.getDouble(DiscoverMoviesFragment.COL_INDEX_VOTE_AVERAGE));
 
-        Picasso.with(context).load(posterPath).into(movieItemHolder.movieThumbImgV);
+        Log.d(LOG_TAG, "bindView: Adding View data for movie : " + title + " poster path : " + posterPath);
+
+        Picasso.with(context).load(posterPath)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(movieItemHolder.movieThumbImgV);
         movieItemHolder.movieNameTxtV.setText(title);
         movieItemHolder.movieRatingTxtV.setText(rating);
-
-
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -73,9 +76,9 @@ public class MovieAdapter extends CursorAdapter {
      * which save the system from searching for a view again and again.
      */
     public class MovieItemHolder {
-        public ImageView movieThumbImgV;
-        public TextView movieNameTxtV;
-        public TextView movieRatingTxtV;
+        public final ImageView movieThumbImgV;
+        public final TextView movieNameTxtV;
+        public final TextView movieRatingTxtV;
 
         public MovieItemHolder(View view){
             this.movieThumbImgV = (ImageView) view.findViewById(R.id.movieThumbImgV);

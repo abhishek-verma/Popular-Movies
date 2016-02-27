@@ -22,8 +22,9 @@
                 android:id="@+id/movieThumbImgV"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/thumb_img_height"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:adjustViewBounds="true" />
 
 
@@ -48,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/movieReleaseDateTxtV"
                 android:layout_alignParentTop="true"
+                android:layout_alignStart="@id/movieReleaseDateTxtV"
                 android:ellipsize="end"
                 android:fadingEdge="horizontal"
                 android:maxLines="2"
@@ -61,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/movieReleaseDateTxtV"
+                android:layout_alignStart="@id/movieReleaseDateTxtV"
                 android:layout_below="@+id/movieNameTxtV"
                 android:textColor="@color/txtColorSec"
                 android:textSize="@dimen/movie_rating_txt_size" />

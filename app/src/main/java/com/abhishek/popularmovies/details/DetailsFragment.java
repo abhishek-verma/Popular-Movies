@@ -3,7 +3,6 @@ package com.abhishek.popularmovies.details;
 import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -47,18 +46,16 @@ import java.util.ArrayList;
  * TODO Fill at least a page with some movie information in project 2
  */
 public class DetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, OnDownloadFailedListener {
-    private static final String LOG_TAG = DetailsFragment.class.getSimpleName();
-
-    public static final int MOVIE_DETAILS_LOADER = 1;
-
     static final int COL_INDEX_MOVIE_ID = 0;
-    static final int COL_INDEX_MOVIE_TITLE = 1;
-    static final int COL_INDEX_RELEASE_DATE = 2;
-    static final int COL_INDEX_VOTE_AVERAGE = 3;
-    static final int COL_INDEX_POSTER_PATH = 4;
-    static final int COL_INDEX_BACKDROP_PATH = 5;
-    static final int COL_INDEX_OVERVIEW = 6;
     static final int COL_INDEX_POPULARITY = 7;
+    private static final String LOG_TAG = DetailsFragment.class.getSimpleName();
+    private static final int MOVIE_DETAILS_LOADER = 1;
+    private static final int COL_INDEX_MOVIE_TITLE = 1;
+    private static final int COL_INDEX_RELEASE_DATE = 2;
+    private static final int COL_INDEX_VOTE_AVERAGE = 3;
+    private static final int COL_INDEX_POSTER_PATH = 4;
+    private static final int COL_INDEX_BACKDROP_PATH = 5;
+    private static final int COL_INDEX_OVERVIEW = 6;
     private static final String[] MOVIE_DETAILS_CURSOR_COLUMNS = {
             MovieContract.MovieEntry._ID,
             MovieContract.MovieEntry.COLUMN_MOVIE_TITLE,
@@ -68,25 +65,24 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
             MovieContract.MovieEntry.COLUMN_BACKDROP_PATH,
             MovieContract.MovieEntry.COLUMN_OVERVIEW,
             MovieContract.MovieEntry.COLUMN_POPULARITY
-    };;
-
+    };
+    public final ArrayList<DataObjects.TrailerData> mTrailerDataList = new ArrayList<>();
+    public final ArrayList<DataObjects.ReviewData> mReviewDataList = new ArrayList<>();
+    public RecyclerView movieTrailerRecV, movieReviewRecV;
+    public String youtubeShareUrl;
+    public ShareActionProvider mShareActionProvider;
+    TrailerAdapter trailerAdapter;
+    ReviewAdapter reviewAdapter;
+    private FetchTrailersDataTask fetchTrailersDataTask;
+    private FetchReviewsDataTask fetchReviewsDataTask;
     private ImageView movieThumbImgV;
     private TextView movieNameTxtV;
     private TextView movieRatingTxtV;
     private TextView movieOverviewTxtV;
     private TextView movieReleaseDateTxtV;
-
-    public RecyclerView movieTrailerRecV, movieReviewRecV;
-    TrailerAdapter trailerAdapter;
-    public ArrayList<DataObjects.TrailerData> mTrailerDataList = new ArrayList<>();
-    ReviewAdapter reviewAdapter;
-    public ArrayList<DataObjects.ReviewData> mReviewDataList = new ArrayList<>();
-
-    public Uri mUri;
-
+    private Uri mUri;
     // For sharing
-    public String movieName, youtubeShareUrl;
-    public ShareActionProvider mShareActionProvider;
+    private String movieName;
 
     public DetailsFragment() {
         setHasOptionsMenu(true);
@@ -95,20 +91,20 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
     /**
      * Create a new instance of DetailFragment, initialized to
      * show the text at 'index'.
-     * @param uriStr
+     * @param uriStr the uri for movie selected for the fragment
      */
     public static DetailsFragment newInstance(String uriStr){
         DetailsFragment f = new DetailsFragment();
 
         //Supply index input as an argument
         Bundle args = new Bundle();
-        args.putString("uri", uriStr.toString());
+        args.putString("uri", uriStr);
 
         f.setArguments(args);
         return f;
     }
 
-    public String getPassedUri(){
+    private String getPassedUri() {
         if(getArguments() != null)
             return getArguments().getString("uri", null);
         else
@@ -223,7 +219,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
      * @return success state of the operation
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public boolean addRemoveMovieFromFav(String id){
+    private boolean addRemoveMovieFromFav(String id) {
         ContentResolver contentResolver = getActivity().getContentResolver();
         Cursor c = contentResolver.query(MovieContract.FavEntry.CONTENT_URI,
                 null,
@@ -242,6 +238,7 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
                 Toast.makeText(getActivity(), "Movie removed from favourites", Toast.LENGTH_SHORT).show();
                 return true;
             }
+            c.close();
             return false;
         }
 
@@ -327,10 +324,22 @@ public class DetailsFragment extends Fragment implements LoaderManager.LoaderCal
         if(mUri == null)
             return;
 
-        FetchTrailersDataTask fetchTrailersDataTask = new FetchTrailersDataTask(this);
+        fetchTrailersDataTask = new FetchTrailersDataTask(this);
         fetchTrailersDataTask.execute(MovieContract.MovieEntry.getMovieIdFromUri(mUri));
 
-        FetchReviewsDataTask fetchReviewsDataTask = new FetchReviewsDataTask(this);
+        fetchReviewsDataTask = new FetchReviewsDataTask(this);
         fetchReviewsDataTask.execute(MovieContract.MovieEntry.getMovieIdFromUri(mUri));
+    }
+
+    @Override
+    public void onDetach() {
+
+        if (fetchReviewsDataTask != null)
+            fetchReviewsDataTask.cancel(true);
+
+        if (fetchTrailersDataTask != null)
+            fetchTrailersDataTask.cancel(true);
+
+        super.onDetach();
     }
 }

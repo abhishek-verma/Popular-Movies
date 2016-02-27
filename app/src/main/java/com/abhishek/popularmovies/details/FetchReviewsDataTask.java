@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.abhishek.popularmovies.R;
 import com.abhishek.popularmovies.Util;
@@ -13,14 +12,13 @@ import org.json.JSONException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by Abhishek on 2/19/2016.
  */
-public class FetchReviewsDataTask extends AsyncTask<String, Void, DataObjects.ReviewData[]> {
+class FetchReviewsDataTask extends AsyncTask<String, Void, DataObjects.ReviewData[]> {
     ///////////////////////////////////////////////////////////////////////////
     // Constants
     ///////////////////////////////////////////////////////////////////////////
@@ -29,7 +27,7 @@ public class FetchReviewsDataTask extends AsyncTask<String, Void, DataObjects.Re
     ///////////////////////////////////////////////////////////////////////////
     // Fields
     ///////////////////////////////////////////////////////////////////////////
-    private DetailsFragment parentFragment;
+    private final DetailsFragment parentFragment;
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructors

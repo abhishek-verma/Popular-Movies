@@ -6,11 +6,6 @@ import android.util.Log;
 
 import org.json.JSONException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -20,7 +15,7 @@ import java.net.URL;
  * update the adapter accordingly (onPostExecute)
  * Created by Abhishek on 18-12-2015.
  */
-public class FetchMoviesDataTask extends AsyncTask<String, Void, Boolean> {
+class FetchMoviesDataTask extends AsyncTask<String, Void, Boolean> {
     ///////////////////////////////////////////////////////////////////////////
     // Constants
     ///////////////////////////////////////////////////////////////////////////
@@ -40,7 +35,7 @@ public class FetchMoviesDataTask extends AsyncTask<String, Void, Boolean> {
      * @param params 2 parameters:
      *               sortMethod: popular/top_rated
      *               page: page no to retrieve data from
-     * @return An array of type MovieData containing details of movies.
+     * @return whether or not doInBackground was a success
      */
     @Override
     protected Boolean doInBackground(String... params) {

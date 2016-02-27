@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.abhishek.popularmovies.data.MovieContract;
 import com.abhishek.popularmovies.details.DetailsActivity;
 import com.abhishek.popularmovies.details.DetailsFragment;
 
@@ -14,7 +13,6 @@ public class MainActivity extends AppCompatActivity implements DiscoverMoviesFra
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private boolean mTwoPane;
-    private static final String DETAIL_FRAGMENT_TAG = "DFTAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +31,6 @@ public class MainActivity extends AppCompatActivity implements DiscoverMoviesFra
         else {
             mTwoPane = false;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//
-//        DiscoverMoviesFragment dmf = (DiscoverMoviesFragment)
-//                getSupportFragmentManager().findFragmentById(R.id.fragment_movies);
     }
 
     @Override

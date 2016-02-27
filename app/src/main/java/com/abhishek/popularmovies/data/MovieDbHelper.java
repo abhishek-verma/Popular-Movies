@@ -11,11 +11,10 @@ import com.abhishek.popularmovies.data.MovieContract.FavEntry;
 /**
  * Created by Abhishek on 2/16/2016.
  */
-public class MovieDbHelper extends SQLiteOpenHelper{
-
-    private static final int DATABASE_VERSION = 1;
+class MovieDbHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "weather.db";
+    private static final int DATABASE_VERSION = 1;
     private static final String LOG_TAG = MovieDbHelper.class.getSimpleName();
 
     public MovieDbHelper(Context context) {

@@ -1,11 +1,9 @@
 package com.abhishek.popularmovies.details;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.abhishek.popularmovies.R;
 import com.abhishek.popularmovies.Util;
@@ -20,7 +18,7 @@ import java.util.List;
 /**
  * Created by Abhishek on 2/19/2016.
  */
-public class FetchTrailersDataTask extends AsyncTask<String, Void, DataObjects.TrailerData[]> {
+class FetchTrailersDataTask extends AsyncTask<String, Void, DataObjects.TrailerData[]> {
     ///////////////////////////////////////////////////////////////////////////
     // Constants
     ///////////////////////////////////////////////////////////////////////////
@@ -29,7 +27,7 @@ public class FetchTrailersDataTask extends AsyncTask<String, Void, DataObjects.T
     ///////////////////////////////////////////////////////////////////////////
     // Fields
     ///////////////////////////////////////////////////////////////////////////
-    private DetailsFragment parentFragment;
+    private final DetailsFragment parentFragment;
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructors
@@ -102,7 +100,7 @@ public class FetchTrailersDataTask extends AsyncTask<String, Void, DataObjects.T
 //        TextView trailerTxtV = (TextView) parentFragment.getView().findViewById(R.id.tmpTrTxtV);
 //        String tmpResData = (String) trailerTxtV.getText();
 //        for (DataObjects.TrailerData data : trailerDatas) {
-//            tmpResData = tmpResData + "\n" + data.trailerName + "\n" + data.sourceUrl + "\n" + data.youtubeThumg;
+//            tmpResData = tmpResData + "\n" + data.trailerName + "\n" + data.sourceUrl + "\n" + data.youtubeThumb;
 //        }
 //        trailerTxtV.setText(tmpResData);
 

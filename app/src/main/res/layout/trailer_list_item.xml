@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
     android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:padding="2dp">
 
     <ImageView android:id="@+id/trailerThumbImgV"
@@ -18,14 +18,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/trailerThumbImgV"
+        android:layout_alignEnd="@id/movieThumbImgV"
         android:layout_alignLeft="@id/trailerThumbImgV"
         android:layout_alignRight="@id/trailerThumbImgV"
+        android:layout_alignStart="@id/movieThumbImgV"
+        android:background="#99000000"
         android:ellipsize="end"
         android:fadingEdge="horizontal"
+        android:padding="16dp"
         android:singleLine="true"
         android:textColor="#fff"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:background="#99000000"
-        android:padding="16dp" />
+        android:textStyle="bold" />
 </RelativeLayout>

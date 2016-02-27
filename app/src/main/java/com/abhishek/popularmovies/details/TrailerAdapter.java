@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abhishek.popularmovies.R;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ import java.util.List;
 public class TrailerAdapter extends
         RecyclerView.Adapter<TrailerAdapter.TrailerItemViewHolder> {
 
-    Context mContext;
-    private List<DataObjects.TrailerData> trailerData;
+    private final Context mContext;
+    private final List<DataObjects.TrailerData> trailerData;
 
     public TrailerAdapter(ArrayList<DataObjects.TrailerData> data, Context context) {
         trailerData = data;
@@ -46,7 +47,9 @@ public class TrailerAdapter extends
     @Override
     public void onBindViewHolder(TrailerItemViewHolder holder, int position) {
         holder.trailerNameTxtV.setText(trailerData.get(position).trailerName);
-        Picasso.with(mContext).load(trailerData.get(position).youtubeThumg).into(holder.trailerThumbImgV);
+        Picasso.with(mContext).load(trailerData
+                .get(position).youtubeThumb)
+                .networkPolicy(NetworkPolicy.OFFLINE).into(holder.trailerThumbImgV);
         holder.trailerUrlStr = trailerData.get(position).sourceUrl;
     }
 
@@ -57,12 +60,16 @@ public class TrailerAdapter extends
         return trailerData.size();
     }
 
+    public interface OnTrailerClickedListener {
+        void onTrailerClicked(Uri youtubeUri);
+    }
+
     public class TrailerItemViewHolder extends
             RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final OnTrailerClickedListener listener;
-        private TextView trailerNameTxtV;
-        private ImageView trailerThumbImgV;
+        private final TextView trailerNameTxtV;
+        private final ImageView trailerThumbImgV;
         public String trailerUrlStr;
 
         public TrailerItemViewHolder(View itemView, OnTrailerClickedListener listener) {
@@ -79,9 +86,5 @@ public class TrailerAdapter extends
         public void onClick(View v) {
             listener.onTrailerClicked(Uri.parse(trailerUrlStr));
         }
-    }
-
-    public interface OnTrailerClickedListener{
-        public void onTrailerClicked(Uri youtubeUri);
     }
 }

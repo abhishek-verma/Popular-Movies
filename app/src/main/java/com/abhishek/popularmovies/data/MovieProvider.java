@@ -17,16 +17,17 @@ import com.abhishek.popularmovies.data.MovieContract;
  */
 public class MovieProvider extends ContentProvider {
 
+    public static final String pPopularMoviesSortOrder =
+            MovieContract.MovieEntry.COLUMN_POPULARITY + " DESC";
+    public static final String pTopRatedMoviesSortOrder =
+            MovieContract.MovieEntry.COLUMN_VOTE_AVEREAGE + " DESC";
+    private static final String LOG_TAG = MovieProvider.class.getSimpleName();
+    private static final int MOVIES = 100;
+    private static final int FAVOURITE_MOVIES = 101;
+    private static final int MOVIE_BY_ID = 10;
     // The URI Matcher used by this content provider
     private static final UriMatcher sUriMatcher = buildUriMatcher();
-    private static final String LOG_TAG = MovieProvider.class.getSimpleName();
-    private MovieDbHelper mOpenHelper;
-
-    static final int MOVIES = 100;
-    static final int FAVOURITE_MOVIES = 101;
-    static final int MOVIE_BY_ID = 10;
-
-    public static final SQLiteQueryBuilder pFavouriteMoviesQueryBuilder;
+    private static final SQLiteQueryBuilder pFavouriteMoviesQueryBuilder;
 
     static {
         pFavouriteMoviesQueryBuilder = new SQLiteQueryBuilder();
@@ -40,11 +41,7 @@ public class MovieProvider extends ContentProvider {
                         ". " + MovieContract.FavEntry._ID);
     }
 
-    public static final String pPopularMoviesSortOrder =
-            MovieContract.MovieEntry.COLUMN_POPULARITY + " DESC";
-
-    public static final String pTopRatedMoviesSortOrder =
-            MovieContract.MovieEntry.COLUMN_VOTE_AVEREAGE + " DESC";
+    private MovieDbHelper mOpenHelper;
 
     private static UriMatcher buildUriMatcher() {
 

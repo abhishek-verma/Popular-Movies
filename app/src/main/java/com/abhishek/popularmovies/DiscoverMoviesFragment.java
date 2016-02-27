@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,19 +26,19 @@ import com.abhishek.popularmovies.data.MovieContract;
 import com.abhishek.popularmovies.data.MovieProvider;
 
 public class DiscoverMoviesFragment extends Fragment implements OnDownloadFailedListener, LoaderManager.LoaderCallbacks<Cursor>{
-    public static final String SORT_ORDER_POPULAR = "popular", SORT_ORDER_TOP_RATED = "top_rated";
-
+    static final int COL_INDEX_MOVIE_TITLE = 1;
+    static final int COL_INDEX_RELEASE_DATE = 2;
+    static final int COL_INDEX_VOTE_AVERAGE = 3;
+    static final int COL_INDEX_POSTER_PATH = 4;
+    static final int COL_INDEX_BACKDROP_PATH = 5;
+    static final int COL_INDEX_OVERVIEW = 6;
+    static final int COL_INDEX_POPULARITY = 7;
+    private static final String LOG_TAG = DiscoverMoviesFragment.class.getSimpleName();
+    private static final String SORT_ORDER_POPULAR = "popular";
+    private static final String SORT_ORDER_TOP_RATED = "top_rated";
     private static final String SELECTED_KEY = "selectedPos";
-    private int mPosition = -1;
-
-    Boolean displayFav = false;
-
-    public MovieAdapter movieAdapter;
-    private String sortOrder = SORT_ORDER_POPULAR;
-
-    public static final int MOVIE_DATA_LOADER = 0;
-
-    private static String[] MOVIE_DATA_CURSOR_COLUMNS = {
+    private static final int MOVIE_DATA_LOADER = 0;
+    private static final String[] MOVIE_DATA_CURSOR_COLUMNS = {
             MovieContract.MovieEntry.TABLE_NAME + "." + MovieContract.MovieEntry._ID,
             MovieContract.MovieEntry.COLUMN_MOVIE_TITLE,
             MovieContract.MovieEntry.COLUMN_RELEASE_DATE,
@@ -47,18 +48,14 @@ public class DiscoverMoviesFragment extends Fragment implements OnDownloadFailed
             MovieContract.MovieEntry.COLUMN_OVERVIEW,
             MovieContract.MovieEntry.COLUMN_POPULARITY
     } ;
-
-    static final int COL_INDEX_MOVIE_ID = 0;
-    static final int COL_INDEX_MOVIE_TITLE = 1;
-    static final int COL_INDEX_RELEASE_DATE = 2;
-    static final int COL_INDEX_VOTE_AVERAGE = 3;
-    static final int COL_INDEX_POSTER_PATH = 4;
-    static final int COL_INDEX_BACKDROP_PATH = 5;
-    static final int COL_INDEX_OVERVIEW = 6;
-    static final int COL_INDEX_POPULARITY = 7;
-
-    Callback mCallbackListener;
-    GridView mGridView;
+    private static final int COL_INDEX_MOVIE_ID = 0;
+    private int mPosition = -1;
+    private Boolean displayFav = false;
+    private FetchMoviesDataTask fetchMoviesDataTask;
+    private MovieAdapter movieAdapter;
+    private String sortOrder = SORT_ORDER_POPULAR;
+    private Callback mCallbackListener;
+    private GridView mGridView;
 
 
     @Override
@@ -87,6 +84,8 @@ public class DiscoverMoviesFragment extends Fragment implements OnDownloadFailed
         mGridView = (GridView) rootView.findViewById(R.id.movieGridView);
 
         movieAdapter = new MovieAdapter(getActivity(), null, 0);
+
+        Log.d(LOG_TAG, "onCreateView: movieAdapter size after creation: " + movieAdapter.getCount());
 
         mGridView.setAdapter(movieAdapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -136,7 +135,7 @@ public class DiscoverMoviesFragment extends Fragment implements OnDownloadFailed
      * @return nada
      */
     private void updateMovieData() {
-        FetchMoviesDataTask fetchMoviesDataTask = new FetchMoviesDataTask(this);
+        fetchMoviesDataTask = new FetchMoviesDataTask(this);
         fetchMoviesDataTask.execute(sortOrder);//get short method param using DefaultSharedPrefs
     }
 
@@ -145,6 +144,16 @@ public class DiscoverMoviesFragment extends Fragment implements OnDownloadFailed
 //        FetchMoviesDataTask fetchMoviesDataTask = new FetchMoviesDataTask(this);
 //        fetchMoviesDataTask.execute(sortOrder, String.valueOf(page));
 //    }
+
+
+    @Override
+    public void onDetach() {
+        if (fetchMoviesDataTask != null) {
+            fetchMoviesDataTask.cancel(true);
+        }
+        Log.d(LOG_TAG, "onDetach: fragment detached");
+        super.onDetach();
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -221,7 +230,9 @@ public class DiscoverMoviesFragment extends Fragment implements OnDownloadFailed
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.d(LOG_TAG, "onLoadFinished: movieAdapter size before swap: " + mGridView.getCount());
         movieAdapter.swapCursor(data);
+        Log.d(LOG_TAG, "onLoadFinished: movieAdapter size after swap: " + mGridView.getCount());
 
         //if previous position exists select it
         if(mPosition != ListView.INVALID_POSITION) {
