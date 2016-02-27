@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abhishek.popularmovies.R;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class TrailerAdapter extends
         holder.trailerNameTxtV.setText(trailerData.get(position).trailerName);
         Picasso.with(mContext).load(trailerData
                 .get(position).youtubeThumb)
-                .networkPolicy(NetworkPolicy.OFFLINE).into(holder.trailerThumbImgV);
+                .into(holder.trailerThumbImgV);
         holder.trailerUrlStr = trailerData.get(position).sourceUrl;
     }
 
